@@ -26,7 +26,7 @@ Clone the repository:
 
 bash
 Copy code
-git clone https://github.com/yourusername/cpp-code-solutions.git
+git clone https://github.com/Sojha09/cpp-code-solutions.git
 Navigate to the folder containing the problem solution you want to run:
 
 bash
