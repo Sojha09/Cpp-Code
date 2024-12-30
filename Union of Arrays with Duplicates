@@ -1,0 +1,41 @@
+//Author: Shubham Ojha
+//Date:30-12-24
+
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
+
+    // Function to find the union of two arrays and return the size of the union
+    int findUnion(vector<int>& a, vector<int>& b) {
+        // Using unordered_set to store unique elements
+        unordered_set<int> st;
+        
+        // Insert elements from array 'a' into the set
+        for (int i = 0; i < a.size(); i++) {
+            st.insert(a[i]);
+        }
+        
+        // Insert elements from array 'b' into the set
+        for (int i = 0; i < b.size(); i++) {
+            st.insert(b[i]);
+        }
+        
+        // Return the size of the set, which represents the union size
+        return st.size();
+    }
+
+
+int main() {
+    // Test example
+    vector<int> a = {1, 2, 3, 4};
+    vector<int> b = {3, 4, 5, 6};
+    
+    Solution sol;
+    int result = sol.findUnion(a, b);
+    
+    cout << "The size of the union is: " << result << endl;  // Output should be 6
+    
+    return 0;
+}
