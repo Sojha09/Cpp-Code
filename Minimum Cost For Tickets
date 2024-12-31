@@ -1,0 +1,42 @@
+//Author: Shubham Ojha
+//Date:31-12-24
+
+
+#include <vector>
+#include <bitset>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+
+class Solution {
+public:
+    bitset<366> need = 0;  // A bitset to store whether a day is a travel day or not.
+    int dp[366];            // Dynamic programming table to store minimum cost for each day.
+    
+    // Recursive function to calculate the minimum cost
+    int f(int d, int d0, vector<int>& costs) {
+        if (d < d0) return 0;  // If we have reached before the first travel day, return 0 cost.
+        if (!need[d]) return f(d - 1, d0, costs);  // If the day is not a travel day, skip it and go to the previous day.
+        if (dp[d] != -1) return dp[d];  // If we've already computed the cost for day 'd', return it.
+
+        // Compute the minimum cost by trying all 3 options (1-day, 7-day, 30-day passes)
+        return dp[d] = min({
+            costs[0] + f(d - 1, d0, costs),   // 1-day pass, move to the previous day.
+            costs[1] + f(d - 7, d0, costs),   // 7-day pass, move to 7 days before.
+            costs[2] + f(d - 30, d0, costs),  // 30-day pass, move to 30 days before.
+        });
+    }
+    
+    // Main function to calculate the minimum cost of the tickets
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        memset(dp, -1, sizeof(dp));  // Initialize dp array to -1 to indicate unvisited days.
+        
+        // Mark all travel days in the bitset 'need'.
+        for (int d : days) {
+            need[d] = 1;
+        }
+
+        // Start the recursive function with the last and first travel day.
+        return f(days.back(), days[0], costs);
+    }
+};
