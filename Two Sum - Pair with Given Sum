@@ -1,0 +1,24 @@
+//Author: Shubham Ojha
+//Date:01-01-25
+
+class Solution {
+  public:
+    bool twoSum(vector<int>& arr, int target) {
+        // code here
+        unordered_set<int> seen;  // Hash set to store elements we have encountered
+    
+    for (int num : arr) {
+        int complement = target - num;
+        
+        // Check if the complement exists in the set
+        if (seen.find(complement) != seen.end()) {
+            return true;  // Pair found
+        }
+        
+        // Add the current number to the set
+        seen.insert(num);
+    }
+    
+    return false;  
+    }
+};
