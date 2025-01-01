@@ -1,0 +1,24 @@
+//Author: Shubham Ojha
+//Date:01-01-25
+
+class solution{
+public:
+int countPairs(vector<int> &arr, int target) {
+        // Code here
+        int count = 0;
+    unordered_map<int, int> freqMap; // Map to store frequency of elements
+    
+    for (int num : arr) {
+        // Check if there's an element that, when added to num, gives the target sum
+        int complement = target - num;
+        if (freqMap.find(complement) != freqMap.end()) {
+            count += freqMap[complement]; // Add the frequency of the complement to the count
+        }
+        
+        // Add or update the frequency of the current number in the map
+        freqMap[num]++;
+    }
+    
+    return count;
+}
+};
