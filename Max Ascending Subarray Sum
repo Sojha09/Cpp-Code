@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int maxAscendingSum(vector<int>& nums) {
+        int maxSum = nums[0], currentSum = nums[0];
+
+        for(int i = 1; i < nums.size(); i++) {
+            if(nums[i] > nums[i - 1]) {
+                currentSum += nums[i];  // Continue adding to the current sum
+            } else {
+                maxSum = max(maxSum, currentSum);  // Update maxSum if needed
+                currentSum = nums[i];  // Reset current sum to the new subarray
+            }
+        }
+
+        return max(maxSum, currentSum);  // Ensure the last sequence is considered
+    }
+};
